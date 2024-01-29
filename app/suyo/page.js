@@ -1,8 +1,26 @@
+import MediumTitle from '@/app/ui/components/typography/medium-Title'
+import CategorizationBarWrapper from '@/app/ui/suyo/categorization-bar'
+import Space from '@/app/ui/components/space'
+import DocCardWrapper from '@/app/ui/suyo/doc-cards'
+
+// import '@/script/init-database'
+
 export const metadata = {
-    title: "主页",
-    description: "管理你的文档",
+    title: '主页',
+    description: '管理你的文档',
 }
 
-export default function Home() {
-    return <h1>Home</h1>
+export default async function Home({ params, searchParams }) {
+    const categorization = searchParams.categorization || null
+    const page = searchParams.page
+
+    return (
+        <>
+            <MediumTitle>文档</MediumTitle>
+            <Space magnification={2} />
+            <CategorizationBarWrapper />
+            <Space magnification={2} />
+            <DocCardWrapper categorization={categorization} currentPage={page} />
+        </>
+    )
 }

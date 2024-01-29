@@ -1,0 +1,45 @@
+.menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 99999;
+    width: var(--menuSize);
+    height: var(--menuSize);
+    padding: 8px 0 0 24px;
+    color: var(--textColorLight);
+    border-radius: 0 0 0 9999px;
+    background-color: var(--primaryColor);
+    cursor: pointer;
+}
+
+.menuContent {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 9999;
+    width: var(--menuSize);
+    height: var(--menuSize);
+    color: var(--textColorDark);
+    border-radius: 0 0 0 9999px;
+    background-color: var(--secondaryColor);
+    transition: 0.3s;
+    overflow: hidden;
+}
+
+.open {
+    padding: calc(2 * var(--space));
+    padding-top: calc(18 * var(--space));
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+    overflow-y: auto;
+}
+
+.menuItemActive,
+.menuItem:hover {
+    text-decoration: underline;
+}
+
+.menuChildrenItem {
+    margin-left: calc(2 * var(--space));
+}

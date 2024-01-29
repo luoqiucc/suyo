@@ -1,0 +1,9 @@
+.button {
+    all: unset;
+    padding:
+        calc(1 * var(--space)) calc(2 * var(--space));
+    background-color: var(--primaryColor);
+    color: var(--textColorLight);
+    cursor: pointer;
+    box-shadow: var(--shadow);
+}

@@ -1,0 +1,29 @@
+.dialogContent {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 9999999;
+    padding: calc(2 * var(--space));
+    background-color: var(--backgroundColor);
+    transform: translateX(-50%) translateY(-50%);
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.627);
+    z-index: 999999;
+}
+
+.title {
+    display: flex;
+    justify-content: space-between;
+    width: 80vw;
+}
+
+.close {
+    display: none;
+}

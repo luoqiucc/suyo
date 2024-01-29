@@ -1,0 +1,15 @@
+.categorizationBar {
+    display: flex;
+    overflow-y: auto;
+}
+
+.tabsItem {
+    margin-right: calc(3 * var(--space));
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.active,
+.tabsItem:hover {
+    text-decoration: underline;
+}
