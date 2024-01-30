@@ -5,7 +5,7 @@ export const metadata = {
     description: '通用设置',
 }
 
-export default function Setting() {
+export default async function Setting() {
     return (
         <>
             <ExtremeSmallTitle>通用设置</ExtremeSmallTitle>

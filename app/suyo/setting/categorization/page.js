@@ -9,7 +9,7 @@ export const metadata = {
     description: '分类设置',
 }
 
-export default function CategorizationSetting() {
+export default async function CategorizationSetting() {
     return (
         <>
             <ExtremeSmallTitle>分类设置</ExtremeSmallTitle>

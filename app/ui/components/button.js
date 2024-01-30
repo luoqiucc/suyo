@@ -4,7 +4,9 @@ import styles from './button.module.css'
 
 export default function Button(props) {
     return (
-        <button className={styles.button}>
+        <button
+            onClick={props.onClick}
+            className={styles.button}>
             <ExtremeSmallTitle>
                 {props.children}
             </ExtremeSmallTitle>

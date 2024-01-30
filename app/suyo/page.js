@@ -3,14 +3,12 @@ import CategorizationBarWrapper from '@/app/ui/suyo/categorization-bar'
 import Space from '@/app/ui/components/space'
 import DocCardWrapper from '@/app/ui/suyo/doc-cards'
 
-// import '@/script/init-database'
-
 export const metadata = {
     title: '主页',
     description: '管理你的文档',
 }
 
-export default async function Home({ params, searchParams }) {
+export default async function Suyo({ params, searchParams }) {
     const categorization = searchParams.categorization || null
     const page = searchParams.page
 
