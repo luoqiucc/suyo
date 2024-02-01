@@ -24,7 +24,7 @@ export default function TabUpdateForm(props) {
     const {
         categorizationName = 'null',
         categorizationUrl = '#',
-        categorizationUID = 'null',
+        categorizationUid = 'null',
         categorizationDescription = '无描述'
     } = props
 
@@ -36,7 +36,7 @@ export default function TabUpdateForm(props) {
                 <input
                     hidden
                     defaultValue={categorizationUID}
-                    name='categorizationUID'
+                    name='categorizationUid'
                 />
                 <div>
                     <input
@@ -114,8 +114,8 @@ export default function TabUpdateForm(props) {
                     style={{ height: '20px', overflow: 'hidden' }}>
                     <input
                         hidden
-                        defaultValue={categorizationUID}
-                        name='categorizationUID'
+                        defaultValue={categorizationUid}
+                        name='categorizationUid'
                     />
                     <button className={styles.delIcon} type='submit'>
                         <IconTrash size={20} />

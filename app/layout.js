@@ -8,7 +8,7 @@ export const metadata = {
   description: "管理你的文档",
 }
 
-export default function RootLayout({ children }) {
+export default async function RootLayout({ children }) {
   return (
     <html lang="zh-CN">
       <body>{children}</body>

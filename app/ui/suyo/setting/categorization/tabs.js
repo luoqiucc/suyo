@@ -6,14 +6,14 @@ export default async function TabUpdateFormWrapper() {
 
     return (
         <>
-            {result && result.map((item) => {
+            {result.map((item) => {
                 return (
                     <TabUpdateForm
                         key={item.uid}
                         categorizationName={item.categorization_name}
                         categorizationUrl={item.categorization_url}
                         categorizationDescription={item.description}
-                        categorizationUID={item.uid} />
+                        categorizationUid={item.uid} />
                 )
             })}
         </>
