@@ -1,7 +1,3 @@
-import clsx from 'clsx'
-
-import styles from './card.module.css'
-
 export default function Card(props) {
     const {
         padding = 1,
@@ -11,12 +7,11 @@ export default function Card(props) {
 
     return (
         <section
-            className={clsx(
-                styles.card,
-                className
-            )}
+            className={className}
             style={{
                 padding: `calc(${padding} * var(--space))`,
+                backgroundColor: 'white',
+                boxShadow: 'var(--shadow)'
             }}>
             {children}
         </section>

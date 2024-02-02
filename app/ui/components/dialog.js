@@ -10,7 +10,6 @@ import Space from '@/app/ui/components/space'
 import styles from './dialog.module.css'
 
 export default function Dialog(props) {
-
     const [isClose, setIsClose] = useState(true)
 
     const {

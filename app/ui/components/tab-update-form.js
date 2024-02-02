@@ -35,7 +35,7 @@ export default function TabUpdateForm(props) {
                 className={styles.form}>
                 <input
                     hidden
-                    defaultValue={categorizationUID}
+                    defaultValue={categorizationUid}
                     name='categorizationUid'
                 />
                 <div>

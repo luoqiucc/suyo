@@ -197,10 +197,10 @@ async function initalizeData() {
         INSERT INTO roles (uid, role_name, description) VALUES (?, 'ROOT', '超级管理员，仅能设置一位，可以进行全部操作');`
 
     const insertAdminStatements = `
-        INSERT INTO roles (uid, role_name, description) VALUES (?, '管理员', '普通管理员，可以进行大部分操作');`
+        INSERT INTO roles (uid, role_name, description) VALUES (?, 'ADMIN', '普通管理员，可以进行大部分操作');`
 
     const insertUserStatements = `
-        INSERT INTO roles (uid, role_name, description) VALUES (?, '用户', '普通用户，具体权限由管理员赋予');`
+        INSERT INTO roles (uid, role_name, description) VALUES (?, 'USER', '普通用户，具体权限由管理员赋予');`
 
     const [root] = await query(insertRootStatements, [getUid()])
     const [admin] = await query(insertAdminStatements, [getUid()])

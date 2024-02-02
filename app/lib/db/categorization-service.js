@@ -18,7 +18,7 @@ class CategorizationService {
         const statements = `
             INSERT INTO categorizations
             (uid, categorization_name, categorization_url, description) VALUES
-            (?, ?, ?, ?)`
+            (?, ?, ?, ?);`
 
         const [result] = await query(statements, [
             uid,
@@ -30,10 +30,38 @@ class CategorizationService {
         return result
     }
 
+    async edit(
+        uid,
+        categorization_name,
+        categorization_url,
+        description
+    ) {
+        const statements = `
+            UPDATE 
+                categorizations 
+            SET 
+                categorization_name = ?,
+                categorization_url = ?,
+                description = ?
+            WHERE 
+                uid = ?;`
+
+        const [result] = await query(statements, [
+            categorization_name,
+            categorization_url,
+            description,
+            uid
+        ])
+
+        return result
+    }
+
     async remove(categorization_uid) {
-        const statements = `DELETE FROM categorizations WHERE uid = ?`
+        const statements = `DELETE FROM categorizations WHERE uid = ?;`
 
         const [result] = await query(statements, [categorization_uid])
+
+        return result
     }
 }
 

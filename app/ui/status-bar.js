@@ -24,7 +24,11 @@ const links = [
             {
                 name: '分类设置',
                 href: '/suyo/setting/categorization'
-            }
+            },
+            {
+                name: '用户设置',
+                href: '/suyo/setting/user'
+            },
         ]
     }
 ]

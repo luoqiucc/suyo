@@ -1,6 +1,7 @@
 'use client'
 
 import { useFormState } from 'react-dom'
+import { IconAlertCircle } from '@tabler/icons-react'
 
 import { createCategorization } from '@/app/lib/action/categorization-action'
 import Space from '@/app/ui/components/space'
@@ -10,7 +11,7 @@ import Button from '@/app/ui/components/button'
 import styles from './create-form.module.css'
 
 export default function Form() {
-    const initialState = { message: null, errors: {} }
+    const initialState = { message: null, errors: {} };
     const [state, dispatch] = useFormState(createCategorization, initialState)
 
     return (
@@ -66,6 +67,20 @@ export default function Form() {
             <Button type='submit'>
                 添加分类
             </Button>
+            <Space />
+            {!(state.errors.errorMessage === 'NEXT_REDIRECT' || !state.errors.errorMessage) && (
+                <div
+                    style={{
+                        color: 'red',
+                        display: 'flex',
+                        alignItems: 'center'
+                    }}>
+                    <IconAlertCircle size={24} />
+                    <MediumBody style={{ marginLeft: 'calc(1 * var(--space))' }}>
+                        {state.errors.errorMessage}
+                    </MediumBody>
+                </div>
+            )}
         </form>
     )
 }
