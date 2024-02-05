@@ -15,7 +15,13 @@ import styles from './statusBar.module.css'
 const links = [
     {
         name: '文档',
-        href: '/suyo'
+        href: '/suyo',
+        children: [
+            {
+                name: '文件上传 & 批量管理',
+                href: '/suyo/manager'
+            }
+        ]
     },
     {
         name: '设置',

@@ -1,8 +1,9 @@
 'use server'
 
-import { signIn } from '@/auth'
 import { AuthError } from 'next-auth'
 import { redirect } from 'next/navigation'
+import { signIn } from '@/auth'
+import { stateInfo } from '@/app/lib/error'
 
 export async function authenticate(prevState, formData) {
     const email = formData.get('email')
@@ -10,7 +11,7 @@ export async function authenticate(prevState, formData) {
     const redirectUrl = formData.get('redirectUrl')
 
     if (!email.trim() || !password.trim()) {
-        return '有必填项为空'
+        return stateInfo('有必填项为空')
     }
 
     try {
@@ -19,14 +20,13 @@ export async function authenticate(prevState, formData) {
         if (error instanceof AuthError) {
             switch (error.type) {
                 case 'CredentialsSignin':
-                    return '用户名或密码错误'
+                    return stateInfo('用户名或密码错误')
                 default:
-                    return '糟糕!!! 出现了一些问题，登录失败'
+                    return stateInfo('糟糕!!! 出现了一些问题，登录失败')
             }
         }
     }
 
-    // 这是临时解决无法自动重定向的方案，先手动进行跳转
     if (redirectUrl === '') {
         redirect('/suyo')
     } else {

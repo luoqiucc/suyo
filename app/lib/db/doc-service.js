@@ -11,7 +11,19 @@ class DocService {
 
     async getDocsByConstraints(constraints) {
         let statements = `
-            SELECT * FROM docs d LEFT JOIN categorizations c ON d.categorization_id = c.id `
+            SELECT
+                docs.*,
+                categorizations.uid AS categorizations_uid,
+                categorizations.id AS categorizations_id,
+                categorizations.title AS categorizations_title,
+                categorizations.url AS categorizations_url,
+                categorizations.description AS categorizations_description,
+                categorizations.create_timestamp AS categorizations_create_timestamp,
+                categorizations.update_timestamp AS categorizations_update_timestamp
+            FROM
+                docs
+                LEFT JOIN
+                    categorizations ON docs.categorization_id = categorizations.id `
 
         const {
             currentPage,
@@ -25,7 +37,7 @@ class DocService {
         ]
 
         if (categorization) {
-            statements += ` WHERE categorization_url=? `
+            statements += ` WHERE categorizations.url=? `
             params = [
                 categorization,
                 ...params
@@ -35,6 +47,29 @@ class DocService {
         statements += ` LIMIT  ?, ? `
 
         const [result] = await query(statements, params)
+
+        console.log(result);
+
+        return result
+    }
+
+    async create(
+        uid,
+        title,
+        author,
+        description,
+        uploader
+    ) {
+        const statements = `
+            INSERT INTO docs (uid, title, author, description, uploader) VALUES (?, ?, ?, ?, ?);`
+
+        const [result] = await query(statements, [
+            uid,
+            title,
+            author,
+            description,
+            uploader
+        ])
 
         return result
     }

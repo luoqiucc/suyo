@@ -52,14 +52,14 @@ export default function CategorizationBar(props) {
                             styles.tabsItem,
                             {
                                 [styles.active]:
-                                    item.categorization_url === searchParams.get('categorization')
+                                    item.url === searchParams.get('categorization')
                             }
                         )}
                         onClick={() => {
-                            handleSearch(item.categorization_url)
+                            handleSearch(item.url)
                         }}>
                         <MediumBody>
-                            {item.categorization_name}
+                            {item.title}
                         </MediumBody>
                     </span>
                 )

@@ -16,6 +16,29 @@ class UserService {
 
         return result
     }
+
+    async editUsername(uid, username) {
+        const statements = `
+            UPDATE
+                users
+            SET
+                username = ?
+            WHERE
+                uid = ?;`
+
+        const [result] = await query(statements, [username, uid])
+
+        return result
+    }
+
+    async create(uid, username, email, password) {
+        const statements = `
+            INSERT INTO users (uid, username, email, password) VALUES (?, ?, ?, ?);`
+
+        const [result] = await query(statements, [uid, username, email, password])
+
+        return result
+    }
 }
 
 export default new UserService()

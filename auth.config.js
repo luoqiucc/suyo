@@ -6,8 +6,9 @@ export const authConfig = {
         authorized({ auth, request: { nextUrl } }) {
             const isLoggedIn = !!auth
             const isSetting = nextUrl.pathname.startsWith('/suyo/setting')
+            const isManager = nextUrl.pathname.startsWith('/suyo/manager')
 
-            if (isSetting) {
+            if (isSetting || isManager) {
                 if (isLoggedIn) {
                     return true
                 }

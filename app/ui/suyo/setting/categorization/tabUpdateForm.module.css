@@ -21,14 +21,3 @@
     height: 20px;
     margin-left: calc(2 * var(--space));
 }
-
-.input {
-    all: unset;
-    display: block;
-    width: 100%;
-    padding: calc(1 * var(--space));
-    background-color: white;
-    font-size: var(--mediumBody);
-    box-shadow: var(--shadow);
-    box-sizing: border-box;
-}

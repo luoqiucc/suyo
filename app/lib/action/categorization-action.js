@@ -7,22 +7,22 @@ import { getUid } from '@/app/lib/utils/uid'
 import { toPinyin } from '@/app/lib/utils/common'
 import categorizationService from '@/app/lib/db/categorization-service'
 import authorizedService from '@/app/lib/db/authorized-service'
-import { errorInfo } from '@/app/lib/error'
+import { stateInfo } from '@/app/lib/error'
 
 export async function createCategorization(prevState, formData) {
-    const name = formData.get('categorizationName')
-    const description = formData.get('categorizationDescription')
-    let url = formData.get('categorizationUrl')
+    const title = formData.get('title')
+    const description = formData.get('description')
+    let url = formData.get('url')
 
-    if (url === '') {
-        url = toPinyin(name)
+    if (!url || url === '') {
+        url = toPinyin(title)
     }
 
     try {
         await authorizedService.updateCategorizationAuth()
-        await categorizationService.add(getUid(), name, url, description)
+        await categorizationService.create(getUid(), title, url, description)
     } catch (error) {
-        return errorInfo(error.message)
+        return stateInfo(error.message)
     }
 
     revalidatePath('/suyo/setting/categorization')
@@ -30,13 +30,13 @@ export async function createCategorization(prevState, formData) {
 }
 
 export async function removeCategorization(prevState, formData) {
-    const uid = formData.get('categorizationUid')
+    const uid = formData.get('uid')
 
     try {
         await authorizedService.updateCategorizationAuth()
         await categorizationService.remove(uid)
     } catch (error) {
-        return errorInfo(error.message)
+        return stateInfo(error.message)
     }
 
     revalidatePath('/suyo/setting/categorization')
@@ -44,16 +44,16 @@ export async function removeCategorization(prevState, formData) {
 }
 
 export async function editCategorization(prevState, formData) {
-    const uid = formData.get('categorizationUid')
-    const name = formData.get('categorizationName')
-    const url = formData.get('categorizationUrl')
-    const description = formData.get('categorizationDescription')
+    const uid = formData.get('uid')
+    const name = formData.get('name')
+    const url = formData.get('url')
+    const description = formData.get('description')
 
     try {
         await authorizedService.updateCategorizationAuth()
         await categorizationService.edit(uid, name, url, description)
     } catch (error) {
-        return errorInfo(error.message)
+        return stateInfo(error.message)
     }
 
     revalidatePath('/suyo/setting/categorization')

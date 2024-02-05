@@ -9,11 +9,13 @@ import MediumBody from '@/app/ui/components/typography/medium-body'
 import Button from '@/app/ui/components/button'
 import Card from '@/app/ui/components/card'
 import SmallTitle from '@/app/ui/components/typography/small-title'
+import ErrorTip from './components/error-tip'
 
 import styles from './login-form.module.css'
 
 export default function LoginForm() {
-    const [state, dispatch] = useFormState(authenticate, null)
+    const initialState = { message: null, errors: {} }
+    const [state, dispatch] = useFormState(authenticate, initialState)
     const searchParams = useSearchParams()
 
     return (
@@ -26,10 +28,12 @@ export default function LoginForm() {
                 <form
                     action={dispatch}
                     className={styles.form}>
-                    <input hidden name='redirectUrl' defaultValue={new URLSearchParams(searchParams).get('callbackUrl')} />
+                    <input
+                        type='hidden'
+                        name='redirectUrl'
+                        defaultValue={new URLSearchParams(searchParams).get('callbackUrl')} />
                     <div>
                         <input
-                            className={styles.input}
                             type='text'
                             id='email'
                             name='email'
@@ -45,8 +49,7 @@ export default function LoginForm() {
                     <Space magnification={2} />
                     <div>
                         <input
-                            className={styles.input}
-                            type='text'
+                            type='password'
                             id='password'
                             name='password'
                             placeholder='密码'
@@ -65,9 +68,7 @@ export default function LoginForm() {
                     </Button>
                 </form>
                 <Space />
-                <div className={styles.error}>
-                    {state && <MediumBody>{state}</MediumBody>}
-                </div>
+                <ErrorTip state={state} />
             </Card>
         </div>
     )

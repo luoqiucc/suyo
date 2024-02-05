@@ -9,6 +9,7 @@ import ExtremeSmallTitle from '@/app/ui/components/typography/extremeSmall-title
 import Space from '@/app/ui/components/space'
 import Dialog from '@/app/ui/components/dialog'
 import Button from '@/app/ui/components/button'
+import ErrorTip from '@/app/ui/components/error-tip'
 import {
     removeCategorization,
     editCategorization
@@ -22,10 +23,10 @@ export default function TabUpdateForm(props) {
     const [editState, editDispatch] = useFormState(editCategorization, initialState)
 
     const {
-        categorizationName = 'null',
-        categorizationUrl = '#',
-        categorizationUid = 'null',
-        categorizationDescription = '无描述'
+        title = 'null',
+        url = '#',
+        uid = 'null',
+        description = '无描述'
     } = props
 
     function Edit() {
@@ -34,21 +35,20 @@ export default function TabUpdateForm(props) {
                 action={editDispatch}
                 className={styles.form}>
                 <input
-                    hidden
-                    defaultValue={categorizationUid}
-                    name='categorizationUid'
+                    type='hidden'
+                    defaultValue={uid}
+                    name='uid'
                 />
                 <div>
                     <input
-                        className={styles.input}
                         type='text'
-                        id='categorization_name'
-                        name="categorizationName"
-                        defaultValue={categorizationName}
+                        id='name'
+                        name='title'
+                        defaultValue={title}
                         placeholder='分类名称'
                         required />
                     <Space />
-                    <label htmlFor='categorization_name'>
+                    <label htmlFor='title'>
                         <MediumBody>
                             分类的名字
                         </MediumBody>
@@ -57,14 +57,13 @@ export default function TabUpdateForm(props) {
                 <Space magnification={2} />
                 <div>
                     <input
-                        className={styles.input}
                         type='text'
-                        id='categorization_url'
-                        name="categorizationUrl"
-                        defaultValue={categorizationUrl}
+                        id='url'
+                        name='url'
+                        defaultValue={url}
                         placeholder='分类Url' />
                     <Space />
-                    <label htmlFor='categorization_url'>
+                    <label htmlFor='url'>
                         <MediumBody>
                             分类url是指在浏览器地址栏中显示的内容，若不设置系统将自动分配
                         </MediumBody>
@@ -73,14 +72,13 @@ export default function TabUpdateForm(props) {
                 <Space magnification={2} />
                 <div>
                     <input
-                        className={styles.input}
                         type='text'
-                        id='categorization_description'
-                        name="categorizationDescription"
-                        defaultValue={categorizationDescription}
+                        id='description'
+                        name='description'
+                        defaultValue={description}
                         placeholder='分类描述' />
                     <Space />
-                    <label htmlFor='categorization_description'>
+                    <label htmlFor='description'>
                         <MediumBody>
                             该分类的简要描述
                         </MediumBody>
@@ -90,6 +88,8 @@ export default function TabUpdateForm(props) {
                 <Button type='submit'>
                     修改分类
                 </Button>
+                <Space />
+                <ErrorTip state={editState} />
             </form>
         )
     }
@@ -99,7 +99,7 @@ export default function TabUpdateForm(props) {
             <div className={styles.tabContent}>
                 <div>
                     <ExtremeSmallTitle>
-                        {categorizationName}
+                        {title}
                     </ExtremeSmallTitle>
                 </div>
 
@@ -113,9 +113,9 @@ export default function TabUpdateForm(props) {
                     action={removeDispatch}
                     style={{ height: '20px', overflow: 'hidden' }}>
                     <input
-                        hidden
-                        defaultValue={categorizationUid}
-                        name='categorizationUid'
+                        type='hidden'
+                        defaultValue={uid}
+                        name='uid'
                     />
                     <button className={styles.delIcon} type='submit'>
                         <IconTrash size={20} />

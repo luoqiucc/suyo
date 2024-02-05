@@ -2,31 +2,44 @@
 
 import { useFormState } from 'react-dom'
 
-import { createCategorization } from '@/app/lib/action/categorization-action'
+import { createUser } from '@/app/lib/action/user-action'
 import Space from '@/app/ui/components/space'
 import MediumBody from '@/app/ui/components/typography/medium-body'
 import Button from '@/app/ui/components/button'
 import ErrorTip from '@/app/ui/components/error-tip'
 
-import styles from './create-form.module.css'
-
-export default function CreateCategorizationForm() {
-    const initialState = { message: null, errors: {} }
-    const [state, dispatch] = useFormState(createCategorization, initialState)
+export default function CreateUserForm() {
+    const initialState = { message: null, errors: {} };
+    const [state, dispatch] = useFormState(createUser, initialState)
 
     return (
         <form action={dispatch}>
             <div>
                 <input
                     type='text'
-                    id='new_title'
-                    name='title'
-                    placeholder='新分类名称'
+                    id='new_username'
+                    name='username'
+                    placeholder='用户名'
                     required />
                 <Space />
-                <label htmlFor='new_title'>
+                <label htmlFor='new_username'>
                     <MediumBody>
-                        新分类的名字
+                        新用户的显示名称
+                    </MediumBody>
+                </label>
+            </div>
+            <Space magnification={2} />
+            <div>
+                <input
+                    type='password'
+                    id='new_password'
+                    name="password"
+                    placeholder='密码'
+                    required />
+                <Space />
+                <label htmlFor='new_password'>
+                    <MediumBody>
+                        登录密码
                     </MediumBody>
                 </label>
             </div>
@@ -34,33 +47,20 @@ export default function CreateCategorizationForm() {
             <div>
                 <input
                     type='text'
-                    id='new_url'
-                    name='url'
-                    placeholder='分类Url' />
+                    id='new_email'
+                    name='email'
+                    placeholder='邮箱'
+                    required />
                 <Space />
-                <label htmlFor='new_url'>
+                <label htmlFor='new_email'>
                     <MediumBody>
-                        分类url是指在浏览器地址栏中显示的内容，若不设置系统将自动分配
-                    </MediumBody>
-                </label>
-            </div>
-            <Space magnification={2} />
-            <div>
-                <input
-                    type='text'
-                    id='new_description'
-                    name='description'
-                    placeholder='分类描述' />
-                <Space />
-                <label htmlFor='new_description'>
-                    <MediumBody>
-                        该分类的简要描述
+                        登录邮箱
                     </MediumBody>
                 </label>
             </div>
             <Space magnification={2} />
             <Button type='submit'>
-                添加分类
+                添加用户
             </Button>
             <Space />
             <ErrorTip state={state} />

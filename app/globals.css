@@ -37,3 +37,19 @@ a {
     text-decoration: none;
     color: inherit;
 }
+
+input {
+    all: unset;
+    display: block;
+    width: 100%;
+    padding: calc(1 * var(--space));
+    background-color: white;
+    font-size: var(--mediumBody);
+    box-shadow: var(--shadow);
+    box-sizing: border-box;
+}
+
+input:disabled {
+    opacity: 0.8;
+    box-shadow: none;
+}

@@ -1,6 +1,6 @@
 import {
-    IconUserCircle,
     IconUsers,
+    IconUser,
     IconLogout
 } from '@tabler/icons-react'
 import Link from 'next/link'
@@ -29,7 +29,7 @@ export default async function LoginInfo() {
                 }}>
                 {user.name !== 'null' ? (
                     <>
-                        <IconUserCircle style={{ marginRight: 'calc(1 * var(--space))' }} size={24} />
+                        <IconUser style={{ marginRight: 'calc(1 * var(--space))' }} size={24} />
                         <ExtremeSmallTitle>{user.name}</ExtremeSmallTitle>
                         <form
                             action={async () => {

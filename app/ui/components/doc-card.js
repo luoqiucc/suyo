@@ -6,7 +6,7 @@ import Space from './space'
 import styles from './docCard.module.css'
 
 export default function DocCard(props) {
-    const { title = '占星全书-把世界装进卡牌' } = props
+    const { title = 'null' } = props
 
     return (
         <Link href='/suyo/setting'>

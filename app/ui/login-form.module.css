@@ -1,14 +1,3 @@
-.input {
-    all: unset;
-    display: block;
-    width: 100%;
-    padding: calc(1 * var(--space));
-    background-color: white;
-    font-size: var(--mediumBody);
-    box-shadow: var(--shadow);
-    box-sizing: border-box;
-}
-
 .login {
     height: 100vh;
     display: flex;
@@ -18,8 +7,4 @@
 
 .card {
     min-width: 345px;
-}
-
-.error {
-    color: red;
 }

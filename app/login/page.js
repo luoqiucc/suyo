@@ -6,9 +6,5 @@ export const metadata = {
 }
 
 export default function Login() {
-    return (
-        <>
-            <LoginForm />
-        </>
-    )
+    return <LoginForm />
 }

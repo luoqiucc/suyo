@@ -1,4 +1,4 @@
-export function errorInfo(error, message) {
+export function stateInfo(error, message) {
     return {
         message,
         errors: {
