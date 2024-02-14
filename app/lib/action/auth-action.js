@@ -3,7 +3,7 @@
 import { AuthError } from 'next-auth'
 import { redirect } from 'next/navigation'
 import { signIn } from '@/auth'
-import { stateInfo } from '@/app/lib/error'
+import { stateInfo } from '@/app/lib/action/state.js'
 
 export async function authenticate(prevState, formData) {
     const email = formData.get('email')

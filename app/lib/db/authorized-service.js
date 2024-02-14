@@ -7,7 +7,6 @@
 import query from './index'
 import userService from './user-service'
 import settingService from './setting-service'
-
 import { auth } from '@/auth'
 
 const ROLE_NAME_ROOT = 'ROOT'

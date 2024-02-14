@@ -110,7 +110,13 @@ async function seedDocs() {
             uid VARCHAR(255) NOT NULL,
             id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
             title VARCHAR(255) NOT NULL,
-            author VARCHAR(255) DEFAULT '未知作者',
+            language VARCHAR(255),
+            identifier VARCHAR(255),
+            creator VARCHAR(255),
+            contributor VARCHAR(255),
+            publisher VARCHAR(255),
+            type VARCHAR(255),
+            date VARCHAR(255),
             description TEXT,
             uploader INT,
             categorization_id INT DEFAULT 0,
@@ -159,7 +165,22 @@ async function seedContent() {
             uid VARCHAR(255) NOT NULL,
             id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
             chapters_id INT NOT NULL,
-            body TEXT,
+            body LONGTEXT,
+            create_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            update_timestamp TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+        );`
+
+    await query(statements)
+}
+
+// 封面表
+async function seedCover() {
+    const statements = `
+        CREATE TABLE IF NOT EXISTS cover (
+            uid VARCHAR(255) NOT NULL,
+            id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+            doc_id INT NOT NULL,
+            image_base64 LONGTEXT,
             create_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             update_timestamp TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         );`
@@ -242,6 +263,7 @@ async function main() {
     await seedChapters()
     await seedCategorizations()
     await seedContent()
+    await seedCover()
 
     try {
         await initalizeData()

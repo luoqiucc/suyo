@@ -1,9 +1,8 @@
 'use client'
 
-import { useState } from 'react'
 import { useFormState } from 'react-dom'
 
-import { uploadFile } from '@/app/lib/action/file-action'
+import { addDoc } from '@/app/lib/action/doc-action'
 import Button from '@/app/ui/components/button'
 import Space from '@/app/ui/components/space'
 import MediumBody from '@/app/ui/components/typography/medium-body'
@@ -11,7 +10,7 @@ import ErrorTip from '@/app/ui/components/error-tip'
 
 export default function UploadForm() {
     const initialState = { message: null, errors: {} }
-    const [state, dispatch] = useFormState(uploadFile, initialState)
+    const [state, dispatch] = useFormState(addDoc, initialState)
 
     return (
         <form action={dispatch}>

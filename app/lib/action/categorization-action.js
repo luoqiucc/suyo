@@ -7,7 +7,7 @@ import { getUid } from '@/app/lib/utils/uid'
 import { toPinyin } from '@/app/lib/utils/common'
 import categorizationService from '@/app/lib/db/categorization-service'
 import authorizedService from '@/app/lib/db/authorized-service'
-import { stateInfo } from '@/app/lib/error'
+import { stateInfo } from '@/app/lib/action/state.js'
 
 export async function createCategorization(prevState, formData) {
     const title = formData.get('title')

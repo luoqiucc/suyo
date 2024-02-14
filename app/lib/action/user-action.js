@@ -3,7 +3,7 @@
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
-import { stateInfo } from '@/app/lib/error'
+import { stateInfo } from '@/app/lib/action/state.js'
 import authorizedService from '@/app/lib/db/authorized-service'
 import userService from '@/app/lib/db/user-service'
 import { getUid } from '@/app/lib/utils/uid'

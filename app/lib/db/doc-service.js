@@ -11,7 +11,7 @@ class DocService {
 
     async getDocsByConstraints(constraints) {
         let statements = `
-            SELECT
+            SELECT 
                 docs.*,
                 categorizations.uid AS categorizations_uid,
                 categorizations.id AS categorizations_id,
@@ -19,11 +19,14 @@ class DocService {
                 categorizations.url AS categorizations_url,
                 categorizations.description AS categorizations_description,
                 categorizations.create_timestamp AS categorizations_create_timestamp,
-                categorizations.update_timestamp AS categorizations_update_timestamp
-            FROM
-                docs
-                LEFT JOIN
-                    categorizations ON docs.categorization_id = categorizations.id `
+                categorizations.update_timestamp AS categorizations_update_timestamp,
+                cover.image_base64 AS cover_image_base64 
+            FROM 
+                docs 
+                LEFT JOIN 
+                    categorizations ON docs.categorization_id = categorizations.id 
+                LEFT JOIN 
+                    cover ON docs.id = cover.doc_id `
 
         const {
             currentPage,
@@ -48,30 +51,45 @@ class DocService {
 
         const [result] = await query(statements, params)
 
-        console.log(result);
-
         return result
     }
 
     async create(
         uid,
-        title,
-        author,
-        description,
-        uploader
+        uploader,
+        metadata,
+        coverImageBase64
     ) {
         const statements = `
-            INSERT INTO docs (uid, title, author, description, uploader) VALUES (?, ?, ?, ?, ?);`
+            INSERT INTO docs (uid, title, language, identifier, creator, contributor, publisher, type, date, description, uploader)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);`
 
-        const [result] = await query(statements, [
+        const coverStatements = `INSERT INTO cover (uid, doc_id, image_base64) VALUES (?, ?, ?);`
+
+        const [docResult] = await query(statements, [
             uid,
-            title,
-            author,
-            description,
+            metadata.title,
+            metadata.language,
+            metadata.identifier,
+            metadata.creator,
+            metadata.contributor,
+            metadata.publisher,
+            metadata.type,
+            metadata.date,
+            metadata.description,
             uploader
         ])
 
-        return result
+        const [coverResult] = await query(coverStatements, [
+            uid,
+            docResult.insertId,
+            coverImageBase64
+        ])
+
+        return {
+            docResult,
+            coverResult
+        }
     }
 }
 
