@@ -151,6 +151,8 @@ async function seedChapters() {
             id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
             doc_id INT NOT NULL,
             title VARCHAR(255) DEFAULT '无标题',
+            play_order int,
+            anchor VARCHAR(255),
             create_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             update_timestamp TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         );`

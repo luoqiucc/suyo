@@ -41,10 +41,6 @@ export async function addDoc(prevState, formData) {
 
     const userId = user[0].id
 
-    if (!existsSync(SOURCE_PATH)) {
-        await mkdir(SOURCE_PATH)
-    }
-
     const files = formData.getAll('files')
     try {
         files.forEach(async (item) => {

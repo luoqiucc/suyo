@@ -8,3 +8,8 @@ export async function readFileByPath(path) {
 export async function removeFile(path) {
     return await unlink(join(path))
 }
+
+export async function readImageToBase64(path) {
+    const data = await readFileByPath(path)
+    return Buffer.from(data).toString('base64')
+}
