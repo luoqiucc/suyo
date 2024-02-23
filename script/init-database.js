@@ -166,8 +166,27 @@ async function seedContent() {
         CREATE TABLE IF NOT EXISTS content (
             uid VARCHAR(255) NOT NULL,
             id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-            chapters_id INT NOT NULL,
+            doc_id INT NOT NULL,
+            play_order int,
+            style LONGTEXT,
             body LONGTEXT,
+            create_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            update_timestamp TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+        );`
+
+    await query(statements)
+}
+
+// 样式表
+async function seedStyles() {
+    const statements = `
+        CREATE TABLE IF NOT EXISTS styles (
+            uid VARCHAR(255) NOT NULL,
+            id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+            filename VARCHAR(255) NOT NULL,
+            doc_id INT NOT NULL,
+            content_id INT NOT NULL,
+            style LONGTEXT,
             create_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             update_timestamp TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
         );`
@@ -265,6 +284,7 @@ async function main() {
     await seedChapters()
     await seedCategorizations()
     await seedContent()
+    await seedStyles()
     await seedCover()
 
     try {

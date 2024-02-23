@@ -12,7 +12,7 @@ const promisePool = pool.promise()
 async function query(sql, params) {
     const conn = await promisePool.getConnection()
     const result = await conn.execute(sql, params)
-    conn.release()
+    promisePool.releaseConnection(conn)
     return result
 }
 

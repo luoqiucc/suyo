@@ -17,7 +17,7 @@ export default function DocCard(props) {
                 <div className={styles.cover}>
                     {coverImg ? (
                         <Image
-                            src={'data:image/png;base64,' + coverImg}
+                            src={coverImg}
                             alt='cover'
                             fill
                             sizes='(max-width: 375px) 50px, 100px'

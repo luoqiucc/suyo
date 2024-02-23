@@ -43,17 +43,32 @@ export default class EpubContext {
      */
     async getContentXMLPath() {
         const path = (await this.getContainer()).container.rootfiles.rootfile['@_full-path']
-
         if (!path) {
-            return join('')
+            return this.getRootPath()
         }
 
-        const index = path.lastIndexOf('/')
-        if (index === -1) {
-            return join('')
+        return join(this.getRootPath(), path, '../')
+    }
+
+    /**
+     * 该方法用于获取目录文件的路径，用于后续路径的拼接
+     * @returns 文件路径的字符串
+     */
+    async getTocNcxPath() {
+        const manifest = (await this.getContent()).package.manifest.item
+        if (!manifest) {
+            return this.getRootPath()
         }
 
-        return join(this.getRootPath(), path.substring(0, index))
+        for (let i = 0; i < manifest.length; i++) {
+            const item = manifest[i]
+            if (
+                String(item['@_id']).includes('ncx') &&
+                String(item['@_media-type']).includes('application/x-dtbncx+xml')
+            ) {
+                return join(await this.getContentXMLPath(), item['@_href'], '../')
+            }
+        }
     }
 
     /**
@@ -114,13 +129,17 @@ export default class EpubContext {
     }
 
     /**
-     * 该方法用于获取所有目录信息
-     * @returns 包含目录信息的对象
+     * 该方法用于获取目录内容。该方法相当于一个迭代器，他并不会
+     * 直接返回全部的目录信息，需要传入一个带参的方法，该参数会
+     * 包含单个目录的信息。
+     * @param {Function} callback 
      */
-    async getCatalogue() {
+    async catalogueForEach(callback) {
+        let navPoint
+
         const manifest = (await this.getContent()).package.manifest.item
         if (!manifest) {
-            return null
+            return callback(null)
         }
 
         for (let i = 0; i < manifest.length; i++) {
@@ -129,7 +148,7 @@ export default class EpubContext {
                 String(item['@_id']).includes('ncx') &&
                 String(item['@_media-type']).includes('application/x-dtbncx+xml')
             ) {
-                return xmlParser(
+                navPoint = xmlParser(
                     await readFileByPath(join(
                         await this.getContentXMLPath(),
                         item['@_href']
@@ -138,7 +157,72 @@ export default class EpubContext {
             }
         }
 
-        return null
+        const selectCatalogue = (item) => {
+            if (item instanceof Array) {
+                item.forEach((e) => {
+                    callback({
+                        id: e['@_id'],
+                        playOrder: e['@_playOrder'],
+                        title: e['navLabel']['text'],
+                        src: e['content']['@_src']
+                    })
+
+                    if (e['navPoint'] instanceof Array) {
+                        selectCatalogue(e['navPoint'])
+                    }
+                })
+            }
+        }
+        selectCatalogue(navPoint)
+    }
+
+    /**
+     * 该方法用于获取目录内容
+     * @returns 包含目录信息的数组
+     */
+    async getCatalogue() {
+        let navPoint
+
+        const manifest = (await this.getContent()).package.manifest.item
+        if (!manifest) {
+            return callback(null)
+        }
+
+        for (let i = 0; i < manifest.length; i++) {
+            const item = manifest[i]
+            if (
+                String(item['@_id']).includes('ncx') &&
+                String(item['@_media-type']).includes('application/x-dtbncx+xml')
+            ) {
+                navPoint = xmlParser(
+                    await readFileByPath(join(
+                        await this.getContentXMLPath(),
+                        item['@_href']
+                    ))
+                ).ncx.navMap.navPoint
+            }
+        }
+
+        let navPointArray = []
+        const selectCatalogue = (item) => {
+            if (item instanceof Array) {
+                item.forEach((e) => {
+                    navPointArray.push({
+                        id: e['@_id'],
+                        playOrder: e['@_playOrder'],
+                        title: e['navLabel']['text'],
+                        src: e['content']['@_src']
+                    })
+
+                    if (e['navPoint'] instanceof Array) {
+                        selectCatalogue(e['navPoint'])
+                    }
+                })
+            }
+        }
+        selectCatalogue(navPoint)
+
+        return navPointArray
     }
 
     /**

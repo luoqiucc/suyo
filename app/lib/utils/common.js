@@ -1,4 +1,4 @@
-import { XMLParser } from 'fast-xml-parser'
+import { XMLParser, XMLBuilder } from 'fast-xml-parser'
 import { pinyin } from 'pinyin-pro'
 
 export function toPinyin(text) {
@@ -19,4 +19,12 @@ export function xmlParser(xml, isIgnoreAttributes = false) {
     }
     const parser = new XMLParser(options)
     return parser.parse(xml)
+}
+
+export function xmlBuilder(obj, isIgnoreAttributes = false) {
+    const options = {
+        ignoreAttributes: isIgnoreAttributes
+    }
+    const builder = new XMLBuilder(options)
+    return builder.build(obj)
 }
