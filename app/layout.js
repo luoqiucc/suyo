@@ -1,4 +1,5 @@
 import './globals.css'
+import StyledJsxRegistry from './registry'
 
 export const metadata = {
   title: {
@@ -11,7 +12,11 @@ export const metadata = {
 export default async function RootLayout({ children }) {
   return (
     <html lang="zh-CN">
-      <body>{children}</body>
+      <body>
+        <StyledJsxRegistry>
+          {children}
+        </StyledJsxRegistry>
+      </body>
     </html>
   )
 }

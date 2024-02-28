@@ -72,7 +72,11 @@ class AuthorizedService {
         return true
     }
 
-    // uid 被修改用户的uid
+    /**
+     * 校验当前登录用户是否具有修改用户信息的权限
+     * @param {String} uid 被修改用户的uid
+     * @returns 
+     */
     async updateUserInfoAuth(uid) {
         const { email } = await getLoginUser()
 

@@ -1,0 +1,10 @@
+.docCardSkeleton {
+    width: 100px;
+    height: 200px;
+    margin: var(--space);
+    background-color: rgb(212, 212, 212);
+}
+
+.docCardSkeletonGroup {
+    display: flex;
+}

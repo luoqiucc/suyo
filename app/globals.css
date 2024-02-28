@@ -38,7 +38,7 @@ a {
     color: inherit;
 }
 
-input {
+/* input {
     all: unset;
     display: block;
     width: 100%;
@@ -47,9 +47,9 @@ input {
     font-size: var(--mediumBody);
     box-shadow: var(--shadow);
     box-sizing: border-box;
-}
+} */
 
-input:disabled {
+/* input:disabled {
     opacity: 0.8;
     box-shadow: none;
-}
+} */

@@ -5,6 +5,12 @@ import LargeBody from '@/app/ui/components/typography/large-body'
 import MediumTitle from '@/app/ui/components/typography/medium-Title'
 import UploadForm from '@/app/ui/suyo/manager/upload-form'
 import DocTableWrapper from '@/app/ui/suyo/manager/doc-tables'
+import { Suspense } from 'react'
+
+export const metadata = {
+    title: '管理文档',
+    description: '管理你的文档',
+}
 
 export default async function Manager({ params, searchParams }) {
     const categorization = searchParams.categorization || null

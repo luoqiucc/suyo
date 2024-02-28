@@ -29,6 +29,21 @@ class ContentService {
         return result
 
     }
+
+    async getContentByChapterUid(chapterUid) {
+        const statements = `
+            SELECT 
+                content.*
+            FROM 
+                content
+                    LEFT JOIN chapters ON chapters.play_order = content.play_order AND chapters.doc_id = content.doc_id
+            WHERE
+                chapters.uid = ?;`
+
+        const [result] = await query(statements, [chapterUid])
+
+        return result
+    }
 }
 
 export default new ContentService()

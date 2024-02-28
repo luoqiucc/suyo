@@ -8,11 +8,12 @@ import styles from './docCard.module.css'
 export default function DocCard(props) {
     const {
         title = null,
-        coverImg = null
+        coverImg = null,
+        uid = ''
     } = props
 
     return (
-        <Link href='/suyo/setting'>
+        <Link href={'/suyo/reader?uid=' + uid}>
             <section className={styles.docCard}>
                 <div className={styles.cover}>
                     {coverImg ? (

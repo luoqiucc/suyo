@@ -33,6 +33,24 @@ class ChapterService {
 
         return result
     }
+
+    async getDocCatalogueByUid(uid) {
+        const statements = `
+            SELECT
+                chapters.*
+            FROM
+                docs
+                LEFT JOIN
+                    chapters ON docs.id = chapters.doc_id 
+            WHERE
+                docs.uid = ?
+            ORDER BY
+                play_order;`
+
+        const [result] = await query(statements, [uid])
+
+        return result
+    }
 }
 
 export default new ChapterService()

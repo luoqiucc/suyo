@@ -8,6 +8,14 @@ class SettingService {
 
         return result
     }
+
+    async updateValueByUid(uid, value) {
+        const statements = `UPDATE settings SET value = ? WHERE uid = ?;`
+
+        const [result] = await query(statements, [value, uid])
+
+        return result
+    }
 }
 
 export default new SettingService()

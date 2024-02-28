@@ -1,3 +1,4 @@
+import { Suspense } from 'react'
 import LoginForm from '@/app/ui/login-form'
 
 export const metadata = {
@@ -6,5 +7,9 @@ export const metadata = {
 }
 
 export default function Login() {
-    return <LoginForm />
+    return (
+        <Suspense>
+            <LoginForm />
+        </Suspense>
+    )
 }

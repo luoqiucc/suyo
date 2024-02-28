@@ -20,7 +20,11 @@ export default async function DocCardWrapper(props) {
         <Grid>
             {docs.map((item) => {
                 return (
-                    <DocCard coverImg={item.cover_image_base64} key={item.uid} title={item.title} />
+                    <DocCard
+                        coverImg={item.cover_image_base64}
+                        key={item.uid}
+                        title={item.title}
+                        uid={item.uid} />
                 )
             })}
         </Grid>
